@@ -41,7 +41,8 @@ public class UserRepository : IUserRepository
             return null;
         }
 
-        var maxId = await _context.Users.MaxAsync(x => x.Id);
+        var maxId = await _context.Users.MaxAsync(u => (int?)u.Id) ?? 0;
+
         var addedUser = new User
         {
             Id = maxId + 1,
